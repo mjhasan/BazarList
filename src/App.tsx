@@ -1,23 +1,51 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 
-function App() {
+type TOnChange = React.ChangeEvent<HTMLInputElement>
+type TKeyPress = React.KeyboardEvent<HTMLDivElement>
+
+const App = () => {
+  const [list, setList] = useState("")
+  const [bazarList, setBazarList] = useState<string[]>([])
+
+  const addItem = () => {
+    const updateList = [...bazarList, list]
+    setBazarList(updateList)
+    setList("")
+  }
+  const removeItem = (itemName: string) => {
+    const removeItem = bazarList.filter(item => item !== itemName)
+    setBazarList(removeItem)
+  }
+
+  const handleKeyPress = (e: TKeyPress) => {
+    if (e.key === 'Enter') {
+      addItem()
+    }
+  }
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>Bazar List</h1>
+        <main>
+          <input
+            onChange={(e: TOnChange) => setList(e.target.value)}
+            onKeyPress={handleKeyPress}
+            value={list}
+            type="text"
+            name="item" />
+          <button onClick={addItem}>Add Item</button>
+          <ol>
+            {
+              bazarList.map(item =>
+                <>
+                  <li key={item}>{item} <button onClick={() => removeItem(item)}>X</button></li>
+                </>
+              )
+            }
+          </ol>
+        </main>
       </header>
     </div>
   );

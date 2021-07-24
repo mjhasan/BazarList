@@ -36,3 +36,28 @@
     transform: rotate(360deg);
   }
 }
+
+input[type="text"] {
+  padding: 0.3rem;
+  margin: 0.1rem;
+  border: none;
+  font-weight: bold;
+}
+
+button {
+  padding: 0.3rem;
+  margin: 0.1rem;
+  border: 1px solid #007bff;
+  color: #fff;
+  background-color: #007bff;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+ol {
+  text-align: left;
+}
+
+h1 {
+  font-size: 100%;
+}
